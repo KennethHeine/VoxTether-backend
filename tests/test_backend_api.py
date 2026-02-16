@@ -11,7 +11,7 @@ Usage:
 Examples:
     python -m tests.test_backend_api
     python -m tests.test_backend_api --base-url http://localhost:5678
-    python -m tests.test_backend_api --audio-file tests/test-recoarding.wav
+    python -m tests.test_backend_api --audio-file tests/test-recording.wav
 """
 
 import argparse
@@ -25,7 +25,7 @@ import requests
 
 # Default configuration
 DEFAULT_BASE_URL = "http://127.0.0.1:5678"
-DEFAULT_AUDIO_FILE = Path(__file__).parent / "test-recoarding.wav"
+DEFAULT_AUDIO_FILE = Path(__file__).parent / "test-recording.wav"
 
 
 def check_health(base_url: str) -> bool:

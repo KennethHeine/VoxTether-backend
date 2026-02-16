@@ -205,7 +205,6 @@ def test_transcription(model, audio_path: str = None) -> dict:
     # Find test audio file
     if audio_path is None:
         test_files = [
-            Path(__file__).parent / "test-recoarding.wav",
             Path(__file__).parent / "test-recording.wav",
             Path(__file__).parent / "test.wav",
         ]
@@ -216,7 +215,7 @@ def test_transcription(model, audio_path: str = None) -> dict:
     
     if not audio_path or not Path(audio_path).exists():
         print_step("No test audio file found")
-        print_step("Create a test audio file at: tests/test-recoarding.wav")
+        print_step("Create a test audio file at: tests/test-recording.wav")
         result["error"] = "No test audio file"
         return result
     
