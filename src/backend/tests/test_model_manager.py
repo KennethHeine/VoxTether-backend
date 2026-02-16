@@ -37,16 +37,16 @@ class TestModelManager:
         manager = ModelManager(str(temp_models_dir))
         
         # Create a fake model directory with model.bin
-        model_dir = temp_models_dir / "small"
+        model_dir = temp_models_dir / "large-v3-turbo"
         model_dir.mkdir()
         (model_dir / "model.bin").touch()
         
         models = manager.list_models()
         
-        # Find the small model
-        small_model = next(m for m in models if m["name"] == "small")
-        assert small_model["downloaded"]
-        assert small_model["path"] == str(model_dir)
+        # Find the large-v3-turbo model
+        turbo_model = next(m for m in models if m["name"] == "large-v3-turbo")
+        assert turbo_model["downloaded"]
+        assert turbo_model["path"] == str(model_dir)
 
     def test_is_model_downloaded(self, temp_models_dir):
         """Test checking if a model is downloaded."""
@@ -118,7 +118,7 @@ class TestModelManager:
         
         with patch("huggingface_hub.snapshot_download") as mock_download:
             # Mock successful download
-            target_path = temp_models_dir / "small"
+            target_path = temp_models_dir / "large-v3-turbo"
             mock_download.return_value = str(target_path)
             
             # Create the directory to simulate download
@@ -126,7 +126,7 @@ class TestModelManager:
             (target_path / "model.bin").touch()
             
             statuses = []
-            async for progress in manager.download_model_async("small"):
+            async for progress in manager.download_model_async("large-v3-turbo"):
                 statuses.append(progress.status)
             
             # Should have downloading and complete statuses
@@ -144,7 +144,7 @@ class TestModelManager:
             
             statuses = []
             try:
-                async for progress in manager.download_model_async("small"):
+                async for progress in manager.download_model_async("large-v3-turbo"):
                     statuses.append(progress.status)
             except Exception:
                 pass  # Expected
